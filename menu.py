@@ -1,4 +1,4 @@
-from utils import  *
+from utils import *
 
 
 class SearchMenu():
@@ -10,7 +10,7 @@ class SearchMenu():
 
     def __init__(self, taskmanager):
         self.taskmanager = taskmanager
-        self.options =  {}
+        self.options = {}
 
         prompts = []
         prompts.append("What would you like to search by?")
@@ -25,7 +25,6 @@ class SearchMenu():
         self.options['c'] = self.keywordsearch
         self.options['b'] = self.daterangesearch
         self.options['d'] = self.regexsearch
-
 
     def showsearchmenu(self):
         while True:
@@ -50,7 +49,7 @@ class SearchMenu():
             print("Time Spent:{0}".format(timespent))
             print("Task Notes:{0}".format(tasknotes))
             print("\n")
-            print("showing {0} of {1}".format(i+1, len(tasks)))
+            print("showing {0} of {1}".format(i + 1, len(tasks)))
             action = input("[N]ext, [E]dit, [D]elete, [R]eturn to main menu: ")
 
             if action.lower() == "n":
@@ -62,17 +61,17 @@ class SearchMenu():
             if action.lower() == "r":
                 return
             if action.lower() == "d":
-               if self.taskmanager.delete_task(task):
-                   print("Entry has been deleted")
-                   asktocontinue()
+                if self.taskmanager.delete_task(task):
+                    print("Entry has been deleted")
+                    asktocontinue()
 
     def edittask(self, task):
 
-        print("Task Date:"+task.datestr)
+        print("Task Date:" + task.datestr)
         response = input("Enter new value or enter to leave as is: ")
         if response != "":
-           if convertdate(response):
-               task.datestr = response
+            if convertdate(response):
+                task.datestr = response
 
         print("Task Title:" + task.title)
         response = input("Enter new value or enter to leave as is: ")
@@ -94,7 +93,7 @@ class SearchMenu():
     def daterangesearch(self):
         searchedalready = False
         while True:
-            if  searchedalready:
+            if searchedalready:
                 response = input("[B]ack to return or enter to search again: ")
                 if response.lower() == 'b':
                     break
@@ -123,7 +122,8 @@ class SearchMenu():
                 if enter == "":
                     continue
 
-            tasksfound = self.taskmanager.find_by_date_range(dateobj1, dateobj2)
+            tasksfound = self.taskmanager.find_by_date_range(dateobj1,
+                                                             dateobj2)
             if len(tasksfound) < 1:
                 print("No tasks found with date range. ")
                 enter = input("Press enter to try again: ")
@@ -134,7 +134,7 @@ class SearchMenu():
     def exactdate(self):
         searchedalready = False
         while True:
-            if  searchedalready:
+            if searchedalready:
                 response = input("[B]ack to return or enter to search again: ")
                 if response.lower() == 'b':
                     break
