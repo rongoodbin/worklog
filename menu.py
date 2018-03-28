@@ -2,6 +2,11 @@ from utils import  *
 
 
 class SearchMenu():
+    """
+    This class is responsible for the different search functionality.
+    class is initialized with a TaskManager to be able to perform
+    the searches and interact with exsisting tasks and delete/modify tasks
+    """
 
     def __init__(self, taskmanager):
         self.taskmanager = taskmanager
@@ -45,8 +50,6 @@ class SearchMenu():
             print("Time Spent:{0}".format(timespent))
             print("Task Notes:{0}".format(tasknotes))
             print("\n")
-
-
             print("showing {0} of {1}".format(i+1, len(tasks)))
             action = input("[N]ext, [E]dit, [D]elete, [R]eturn to main menu: ")
 
