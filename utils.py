@@ -41,3 +41,13 @@ def indexoffirstoccurence(lst, target):
         else:
             return mid
     return None
+
+
+def showmainmenuoptions():
+    prompts = []
+    starttext = "What would you like to do"
+    prompts.append(starttext)
+    prompts.append("a) add new entry")
+    prompts.append("b) search existing")
+    prompts.append("q) quit")
+    return "\n".join(prompts)

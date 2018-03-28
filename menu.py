@@ -161,15 +161,31 @@ class SearchMenu():
             self.showtasks(tasksfound)
 
     def keywordsearch(self):
-        clear_screen()
-        keyword = input("Enter a keyword to search by: ")
+        while True:
+            clear_screen()
+            keyword = input("Enter a keyword to search by: ")
 
-        tasksfound = self.taskmanager.keywordsearch(keyword)
-        self.showtasks(tasksfound)
+            tasksfound = self.taskmanager.keywordsearch(keyword)
+            if len(tasksfound) < 1:
+                print("No tasks with keyword provided. ")
+                enter = input("Press enter to try again or [q]uit:")
+                if enter == "":
+                    continue
+                else:
+                    return
+            self.showtasks(tasksfound)
 
     def regexsearch(self):
-        clear_screen()
-        regex = input("Enter a regex to search by: ")
+        while True:
+            clear_screen()
+            keyword = input("Enter a regex to search by: ")
 
-        tasksfound = self.taskmanager.regexsearch(regex)
-        self.showtasks(tasksfound)
+            tasksfound = self.taskmanager.keywordsearch(keyword)
+            if len(tasksfound) < 1:
+                print("No tasks found with regex provided")
+                enter = input("Press enter to try again or [q]uit:")
+                if enter == "":
+                    continue
+                else:
+                    return
+            self.showtasks(tasksfound)
