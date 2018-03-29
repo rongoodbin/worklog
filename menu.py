@@ -35,11 +35,15 @@ class SearchMenu():
                 break
             if optionselected in self.options:
                 self.options[optionselected]()
+            clear_screen()
 
     def showtasks(self, tasks):
 
-        for i, task in enumerate(tasks):
+        position = 0
+
+        while True:
             clear_screen()
+            task = tasks[position]
             tasktitle = task.title
             taskdate = task.datestr
             timespent = task.timespent
@@ -49,10 +53,19 @@ class SearchMenu():
             print("Time Spent:{0}".format(timespent))
             print("Task Notes:{0}".format(tasknotes))
             print("\n")
-            print("showing {0} of {1}".format(i + 1, len(tasks)))
-            action = input("[N]ext, [E]dit, [D]elete, [R]eturn to main menu: ")
+            print("Result {0} of {1}".format(position + 1, len(tasks)))
+            print("\n")
+            action = input(
+                "[N]ext, [P]revious, [E]dit, [D]elete, [R]eturn to main menu: ")
 
             if action.lower() == "n":
+                position += 1
+                position = position % len(tasks)
+                continue
+
+            if action.lower() == "p":
+                position -= 1
+                position = position % len(tasks)
                 continue
 
             if action.lower() == "e":
@@ -61,7 +74,7 @@ class SearchMenu():
             if action.lower() == "r":
                 return
             if action.lower() == "d":
-                if self.taskmanager.delete_task(task):
+                if self.taskmanager.delete_task(task.taskid):
                     print("Entry has been deleted")
                     asktocontinue()
 
@@ -174,13 +187,16 @@ class SearchMenu():
                 else:
                     return
             self.showtasks(tasksfound)
+            response = input("[B]ack to return or enter to search again: ")
+            if response.lower() == 'b':
+                return
 
     def regexsearch(self):
         while True:
             clear_screen()
             keyword = input("Enter a regex to search by: ")
 
-            tasksfound = self.taskmanager.keywordsearch(keyword)
+            tasksfound = self.taskmanager.regexsearch(keyword)
             if len(tasksfound) < 1:
                 print("No tasks found with regex provided")
                 enter = input("Press enter to try again or [q]uit:")
@@ -189,3 +205,6 @@ class SearchMenu():
                 else:
                     return
             self.showtasks(tasksfound)
+            response = input("[B]ack to return or enter to search again: ")
+            if response.lower() == 'b':
+                return

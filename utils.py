@@ -30,11 +30,18 @@ def convertdate(datestr):
         return None
 
 
-def indexoffirstoccurence(lst, target):
+def index_of_first_occurence(lst, target):
+    for index, task in enumerate(lst):
+        if task.date == target:
+            return index
+    return None
+
+
+def _index_of_first_occurence(lst, target):
     low, high = 0, len(lst) - 1
-    while low <= high:
+    while True:
         mid = (low + high) // 2
-        if lst[mid].date < target:
+        if lst[mid].date <= target:
             low = mid + 1
         elif lst[mid].date > target:
             high = mid - 1
@@ -44,6 +51,7 @@ def indexoffirstoccurence(lst, target):
 
 
 def showmainmenuoptions():
+    clear_screen()
     prompts = []
     starttext = "What would you like to do"
     prompts.append(starttext)

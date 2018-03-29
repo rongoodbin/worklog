@@ -37,18 +37,16 @@ class Worklog:
             self.mainmenu()
 
     def mainmenu(self):
-        print(showmainmenuoptions())
-        useroption = input(showprompt())
-        if useroption.lower() == "a":
-            self.addentry()
-        elif useroption.lower() == 'q':
-            print("Thanks for using the work log system.")
-            sys.exit(1)
-        elif useroption.lower() == 'b':
-            self.searchworklog()
-        useroption = input(">")
-        self.currentoption = "mainmenu"
-        print(useroption)
+        while True:
+            print(showmainmenuoptions())
+            useroption = input(showprompt())
+            if useroption.lower() == "a":
+                self.addentry()
+            elif useroption.lower() == 'q':
+                print("Thanks for using the work log system.")
+                sys.exit(1)
+            elif useroption.lower() == 'b':
+                self.searchworklog()
 
 
 if __name__ == "__main__":

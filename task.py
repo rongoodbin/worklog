@@ -2,7 +2,7 @@ import os
 import datetime
 from functools import total_ordering
 import re
-from utils import indexoffirstoccurence
+from utils import index_of_first_occurence
 
 
 class TaskManager:
@@ -112,7 +112,7 @@ class TaskManager:
          """
         taskstortn = []
         sortedtasklist = sorted(self.tasklist)
-        firstindex = indexoffirstoccurence(
+        firstindex = index_of_first_occurence(
             sortedtasklist, targetdate
         )
         if firstindex is None:
